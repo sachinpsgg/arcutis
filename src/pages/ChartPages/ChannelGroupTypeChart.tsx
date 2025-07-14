@@ -233,7 +233,7 @@ const ChannelGroupTypeChart = () => {
                         fontSize={12}
                       />
                       <YAxis />
-                      <ChartTooltip content={<ChartTooltipContent />} />
+
                       <Bar
                         dataKey="covered"
                         stackId="a"
@@ -263,7 +263,7 @@ const ChannelGroupTypeChart = () => {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
                         <YAxis />
-                        <ChartTooltip content={<ChartTooltipContent />} />
+
                         <Bar dataKey="benefit" fill="var(--color-benefit)" />
                       </BarChart>
                     </ChartContainer>
@@ -282,7 +282,7 @@ const ChannelGroupTypeChart = () => {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
                         <YAxis />
-                        <ChartTooltip content={<ChartTooltipContent />} />
+
                         <Bar
                           dataKey="newMembers"
                           fill="var(--color-newMembers)"
@@ -304,7 +304,7 @@ const ChannelGroupTypeChart = () => {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
                         <YAxis />
-                        <ChartTooltip content={<ChartTooltipContent />} />
+
                         <Line
                           type="monotone"
                           dataKey="avgBenefit"
@@ -357,7 +357,7 @@ const ChannelGroupTypeChart = () => {
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="month" />
                       <YAxis />
-                      <ChartTooltip content={<ChartTooltipContent />} />
+
                       <Area
                         type="monotone"
                         dataKey="covered"
@@ -393,7 +393,7 @@ const ChannelGroupTypeChart = () => {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
                         <YAxis />
-                        <ChartTooltip content={<ChartTooltipContent />} />
+
                         <Bar dataKey="benefit" fill="var(--color-covered)" />
                       </BarChart>
                     </ChartContainer>
@@ -412,7 +412,7 @@ const ChannelGroupTypeChart = () => {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
                         <YAxis />
-                        <ChartTooltip content={<ChartTooltipContent />} />
+
                         <Bar
                           dataKey="newMembers"
                           fill="var(--color-notCovered)"
@@ -434,7 +434,7 @@ const ChannelGroupTypeChart = () => {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
                         <YAxis />
-                        <ChartTooltip content={<ChartTooltipContent />} />
+
                         <Line
                           type="monotone"
                           dataKey="avgBenefit"
@@ -487,7 +487,7 @@ const ChannelGroupTypeChart = () => {
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="month" />
                       <YAxis />
-                      <ChartTooltip content={<ChartTooltipContent />} />
+
                       <ChartLegend content={<ChartLegendContent />} />
                       <Area
                         type="monotone"
@@ -530,7 +530,7 @@ const ChannelGroupTypeChart = () => {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
                         <YAxis />
-                        <ChartTooltip content={<ChartTooltipContent />} />
+
                         <Bar
                           dataKey="benefit"
                           fill="var(--color-employeeOffer)"
@@ -552,7 +552,7 @@ const ChannelGroupTypeChart = () => {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
                         <YAxis />
-                        <ChartTooltip content={<ChartTooltipContent />} />
+
                         <Bar
                           dataKey="newMembers"
                           fill="var(--color-customNetwork)"
@@ -574,7 +574,7 @@ const ChannelGroupTypeChart = () => {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
                         <YAxis />
-                        <ChartTooltip content={<ChartTooltipContent />} />
+
                         <Line
                           type="monotone"
                           dataKey="employeeOffer"
