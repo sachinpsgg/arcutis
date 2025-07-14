@@ -2,7 +2,7 @@ import React from 'react';
 import BrandSummeryChart from "@/pages/ChartPages/BrandSummeryChart.tsx";
 import WeeklyChart from "@/pages/ChartPages/WeeklyChart.tsx";
 import PortfolioChart from "@/pages/ChartPages/PortfolioChart.tsx";
-import ChannelGroupTypeChart from "@/pages/ChartPages/ChannelGroupTypeChart.tsx";
+import ChannelGroupPayerChart from "@/pages/ChartPages/ChannelGroupPayerChart.tsx";
 import DailyChart from "@/pages/ChartPages/DailyChart.tsx";
 import TrendsChart from "@/pages/ChartPages/TrendsChart.tsx";
 import ClaimDistributionChart from "@/pages/ChartPages/ClaimDistributionChart.tsx";
@@ -34,7 +34,7 @@ const ChartSection: React.FC<ChartSectionProps> = ({ activeTab }) => {
                 );
             case 'Channel Group Type':
                 return (
-                    <ChannelGroupTypeChart/>
+                    <ChannelGroupPayerChart/>
                 );
             case 'Daily':
                 return (
