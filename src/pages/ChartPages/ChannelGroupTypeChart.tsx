@@ -19,6 +19,7 @@ import {
   AreaChart,
   Area,
   ResponsiveContainer,
+  Tooltip,
 } from "recharts";
 
 const ChannelGroupTypeChart = () => {
