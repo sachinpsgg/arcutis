@@ -4,11 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import {
-  ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
-} from "@/components/ui/chart";
-import {
   BarChart,
   Bar,
   XAxis,
@@ -20,6 +15,7 @@ import {
   Area,
   ResponsiveContainer,
   Tooltip,
+  Legend,
 } from "recharts";
 
 const ChannelGroupTypeChart = () => {
@@ -102,26 +98,6 @@ const ChannelGroupTypeChart = () => {
     { month: "Nov", employeeOffer: 210, customNetwork: 190, openWeb: 160 },
     { month: "Dec", employeeOffer: 200, customNetwork: 180, openWeb: 150 },
   ];
-
-  // Chart configurations
-  const payerTypeConfig = {
-    benefit: { label: "Benefit", color: "#4A90E2" },
-    newMembers: { label: "New Members", color: "#5BA7F7" },
-    avgBenefit: { label: "Avg. Benefit", color: "#F5A623" },
-    covered: { label: "Covered", color: "#4A90E2" },
-    notCovered: { label: "Not Covered", color: "#F5A623" },
-  };
-
-  const coverageConfig = {
-    covered: { label: "Covered", color: "#4A90E2" },
-    notCovered: { label: "Not Covered", color: "#F5A623" },
-  };
-
-  const groupConfig = {
-    employeeOffer: { label: "10005 - Employee Offer", color: "#4A90E2" },
-    customNetwork: { label: "Custom Network", color: "#F5A623" },
-    openWeb: { label: "Open Web", color: "#5BA7F7" },
-  };
 
   const FilterSection = ({
     title,
@@ -223,30 +199,24 @@ const ChannelGroupTypeChart = () => {
                   <CardTitle>Total Spend by Payer Name</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ChartContainer config={payerTypeConfig} className="h-80">
-                    <BarChart data={totalSpendData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis
-                        dataKey="payer"
-                        angle={-45}
-                        textAnchor="end"
-                        height={100}
-                        fontSize={12}
-                      />
-                      <YAxis />
-
-                      <Bar
-                        dataKey="covered"
-                        stackId="a"
-                        fill="var(--color-covered)"
-                      />
-                      <Bar
-                        dataKey="notCovered"
-                        stackId="a"
-                        fill="var(--color-notCovered)"
-                      />
-                    </BarChart>
-                  </ChartContainer>
+                  <div className="h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={totalSpendData}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis
+                          dataKey="payer"
+                          angle={-45}
+                          textAnchor="end"
+                          height={100}
+                          fontSize={12}
+                        />
+                        <YAxis />
+                        <Tooltip />
+                        <Bar dataKey="covered" stackId="a" fill="#4A90E2" />
+                        <Bar dataKey="notCovered" stackId="a" fill="#F5A623" />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
                 </CardContent>
               </Card>
 
@@ -259,15 +229,17 @@ const ChannelGroupTypeChart = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ChartContainer config={payerTypeConfig} className="h-64">
-                      <BarChart data={payerTypeData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
-
-                        <Bar dataKey="benefit" fill="var(--color-benefit)" />
-                      </BarChart>
-                    </ChartContainer>
+                    <div className="h-64">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={payerTypeData}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="month" />
+                          <YAxis />
+                          <Tooltip />
+                          <Bar dataKey="benefit" fill="#4A90E2" />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
                   </CardContent>
                 </Card>
 
@@ -278,18 +250,17 @@ const ChannelGroupTypeChart = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ChartContainer config={payerTypeConfig} className="h-64">
-                      <BarChart data={payerTypeData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
-
-                        <Bar
-                          dataKey="newMembers"
-                          fill="var(--color-newMembers)"
-                        />
-                      </BarChart>
-                    </ChartContainer>
+                    <div className="h-64">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={payerTypeData}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="month" />
+                          <YAxis />
+                          <Tooltip />
+                          <Bar dataKey="newMembers" fill="#5BA7F7" />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
                   </CardContent>
                 </Card>
 
@@ -300,20 +271,22 @@ const ChannelGroupTypeChart = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ChartContainer config={payerTypeConfig} className="h-64">
-                      <LineChart data={payerTypeData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
-
-                        <Line
-                          type="monotone"
-                          dataKey="avgBenefit"
-                          stroke="var(--color-avgBenefit)"
-                          strokeWidth={2}
-                        />
-                      </LineChart>
-                    </ChartContainer>
+                    <div className="h-64">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart data={payerTypeData}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="month" />
+                          <YAxis />
+                          <Tooltip />
+                          <Line
+                            type="monotone"
+                            dataKey="avgBenefit"
+                            stroke="#F5A623"
+                            strokeWidth={2}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </div>
                   </CardContent>
                 </Card>
               </div>
@@ -353,30 +326,32 @@ const ChannelGroupTypeChart = () => {
                   <CardTitle>Claims by Coverage</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ChartContainer config={coverageConfig} className="h-80">
-                    <AreaChart data={coverageAreaData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="month" />
-                      <YAxis />
-
-                      <Area
-                        type="monotone"
-                        dataKey="covered"
-                        stackId="1"
-                        stroke="var(--color-covered)"
-                        fill="var(--color-covered)"
-                        fillOpacity={0.6}
-                      />
-                      <Area
-                        type="monotone"
-                        dataKey="notCovered"
-                        stackId="1"
-                        stroke="var(--color-notCovered)"
-                        fill="var(--color-notCovered)"
-                        fillOpacity={0.6}
-                      />
-                    </AreaChart>
-                  </ChartContainer>
+                  <div className="h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <AreaChart data={coverageAreaData}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="month" />
+                        <YAxis />
+                        <Tooltip />
+                        <Area
+                          type="monotone"
+                          dataKey="covered"
+                          stackId="1"
+                          stroke="#4A90E2"
+                          fill="#4A90E2"
+                          fillOpacity={0.6}
+                        />
+                        <Area
+                          type="monotone"
+                          dataKey="notCovered"
+                          stackId="1"
+                          stroke="#F5A623"
+                          fill="#F5A623"
+                          fillOpacity={0.6}
+                        />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </div>
                 </CardContent>
               </Card>
 
@@ -389,15 +364,17 @@ const ChannelGroupTypeChart = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ChartContainer config={coverageConfig} className="h-64">
-                      <BarChart data={payerTypeData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
-
-                        <Bar dataKey="benefit" fill="var(--color-covered)" />
-                      </BarChart>
-                    </ChartContainer>
+                    <div className="h-64">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={payerTypeData}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="month" />
+                          <YAxis />
+                          <Tooltip />
+                          <Bar dataKey="benefit" fill="#4A90E2" />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
                   </CardContent>
                 </Card>
 
@@ -408,18 +385,17 @@ const ChannelGroupTypeChart = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ChartContainer config={coverageConfig} className="h-64">
-                      <BarChart data={payerTypeData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
-
-                        <Bar
-                          dataKey="newMembers"
-                          fill="var(--color-notCovered)"
-                        />
-                      </BarChart>
-                    </ChartContainer>
+                    <div className="h-64">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={payerTypeData}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="month" />
+                          <YAxis />
+                          <Tooltip />
+                          <Bar dataKey="newMembers" fill="#F5A623" />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
                   </CardContent>
                 </Card>
 
@@ -430,20 +406,22 @@ const ChannelGroupTypeChart = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ChartContainer config={coverageConfig} className="h-64">
-                      <LineChart data={payerTypeData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
-
-                        <Line
-                          type="monotone"
-                          dataKey="avgBenefit"
-                          stroke="var(--color-covered)"
-                          strokeWidth={2}
-                        />
-                      </LineChart>
-                    </ChartContainer>
+                    <div className="h-64">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart data={payerTypeData}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="month" />
+                          <YAxis />
+                          <Tooltip />
+                          <Line
+                            type="monotone"
+                            dataKey="avgBenefit"
+                            stroke="#4A90E2"
+                            strokeWidth={2}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </div>
                   </CardContent>
                 </Card>
               </div>
@@ -483,39 +461,44 @@ const ChannelGroupTypeChart = () => {
                   <CardTitle>Claims by Group</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ChartContainer config={groupConfig} className="h-80">
-                    <AreaChart data={groupAreaData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="month" />
-                      <YAxis />
-
-                      <ChartLegend content={<ChartLegendContent />} />
-                      <Area
-                        type="monotone"
-                        dataKey="employeeOffer"
-                        stackId="1"
-                        stroke="var(--color-employeeOffer)"
-                        fill="var(--color-employeeOffer)"
-                        fillOpacity={0.6}
-                      />
-                      <Area
-                        type="monotone"
-                        dataKey="customNetwork"
-                        stackId="1"
-                        stroke="var(--color-customNetwork)"
-                        fill="var(--color-customNetwork)"
-                        fillOpacity={0.6}
-                      />
-                      <Area
-                        type="monotone"
-                        dataKey="openWeb"
-                        stackId="1"
-                        stroke="var(--color-openWeb)"
-                        fill="var(--color-openWeb)"
-                        fillOpacity={0.6}
-                      />
-                    </AreaChart>
-                  </ChartContainer>
+                  <div className="h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <AreaChart data={groupAreaData}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="month" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Area
+                          type="monotone"
+                          dataKey="employeeOffer"
+                          stackId="1"
+                          stroke="#4A90E2"
+                          fill="#4A90E2"
+                          fillOpacity={0.6}
+                          name="10005 - Employee Offer"
+                        />
+                        <Area
+                          type="monotone"
+                          dataKey="customNetwork"
+                          stackId="1"
+                          stroke="#F5A623"
+                          fill="#F5A623"
+                          fillOpacity={0.6}
+                          name="Custom Network"
+                        />
+                        <Area
+                          type="monotone"
+                          dataKey="openWeb"
+                          stackId="1"
+                          stroke="#5BA7F7"
+                          fill="#5BA7F7"
+                          fillOpacity={0.6}
+                          name="Open Web"
+                        />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </div>
                 </CardContent>
               </Card>
 
@@ -526,18 +509,17 @@ const ChannelGroupTypeChart = () => {
                     <CardTitle className="text-lg">Benefit by Group</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ChartContainer config={groupConfig} className="h-64">
-                      <BarChart data={payerTypeData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
-
-                        <Bar
-                          dataKey="benefit"
-                          fill="var(--color-employeeOffer)"
-                        />
-                      </BarChart>
-                    </ChartContainer>
+                    <div className="h-64">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={payerTypeData}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="month" />
+                          <YAxis />
+                          <Tooltip />
+                          <Bar dataKey="benefit" fill="#4A90E2" />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
                   </CardContent>
                 </Card>
 
@@ -548,18 +530,17 @@ const ChannelGroupTypeChart = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ChartContainer config={groupConfig} className="h-64">
-                      <BarChart data={payerTypeData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
-
-                        <Bar
-                          dataKey="newMembers"
-                          fill="var(--color-customNetwork)"
-                        />
-                      </BarChart>
-                    </ChartContainer>
+                    <div className="h-64">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={payerTypeData}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="month" />
+                          <YAxis />
+                          <Tooltip />
+                          <Bar dataKey="newMembers" fill="#F5A623" />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
                   </CardContent>
                 </Card>
 
@@ -570,32 +551,37 @@ const ChannelGroupTypeChart = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ChartContainer config={groupConfig} className="h-64">
-                      <LineChart data={groupLineData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
-
-                        <Line
-                          type="monotone"
-                          dataKey="employeeOffer"
-                          stroke="var(--color-employeeOffer)"
-                          strokeWidth={2}
-                        />
-                        <Line
-                          type="monotone"
-                          dataKey="customNetwork"
-                          stroke="var(--color-customNetwork)"
-                          strokeWidth={2}
-                        />
-                        <Line
-                          type="monotone"
-                          dataKey="openWeb"
-                          stroke="var(--color-openWeb)"
-                          strokeWidth={2}
-                        />
-                      </LineChart>
-                    </ChartContainer>
+                    <div className="h-64">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart data={groupLineData}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="month" />
+                          <YAxis />
+                          <Tooltip />
+                          <Line
+                            type="monotone"
+                            dataKey="employeeOffer"
+                            stroke="#4A90E2"
+                            strokeWidth={2}
+                            name="10005 - Employee Offer"
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="customNetwork"
+                            stroke="#F5A623"
+                            strokeWidth={2}
+                            name="Custom Network"
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="openWeb"
+                            stroke="#5BA7F7"
+                            strokeWidth={2}
+                            name="Open Web"
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </div>
                   </CardContent>
                 </Card>
               </div>
