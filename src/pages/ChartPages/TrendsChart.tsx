@@ -15,6 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   BarChart,
   Bar,
@@ -35,23 +36,57 @@ const TrendsChart = () => {
   const [payerType, setPayerType] = useState("All");
   const [daySupply, setDaySupply] = useState("All");
   const [quantity, setQuantity] = useState("All");
+  const [activeTab, setActiveTab] = useState("total-benefits");
+  const [activeFilterTab, setActiveFilterTab] = useState("ndc");
 
   // Mock data for yearly summary
-  const yearlyData = [
-    { year: 2022, benefit: "$64.33 654.42", claims: "9631", members: "6826" },
-    {
-      year: 2023,
-      benefit: "$103.40 166.73",
-      claims: "87539",
-      members: "62417",
-    },
-    {
-      year: "Total",
-      benefit: "$17.24 10 195.99",
-      claims: "707016",
-      members: "368121",
-    },
-  ];
+  const yearlyData = {
+    "total-benefits": [
+      { year: 2022, benefit: "$64.33 654.42", claims: "9631", members: "6826" },
+      {
+        year: 2023,
+        benefit: "$103.40 166.73",
+        claims: "87539",
+        members: "62417",
+      },
+      {
+        year: "Total",
+        benefit: "$17.26 76 016.99",
+        claims: "708509",
+        members: "368572",
+      },
+    ],
+    claims: [
+      { year: 2022, benefit: "$64.33 654.42", claims: "9631", members: "6826" },
+      {
+        year: 2023,
+        benefit: "$103.40 166.73",
+        claims: "87539",
+        members: "62417",
+      },
+      {
+        year: "Total",
+        benefit: "$17.26 76 016.99",
+        claims: "708509",
+        members: "368572",
+      },
+    ],
+    members: [
+      { year: 2022, benefit: "$64.33 654.42", claims: "9631", members: "6826" },
+      {
+        year: 2023,
+        benefit: "$103.40 166.73",
+        claims: "87539",
+        members: "62417",
+      },
+      {
+        year: "Total",
+        benefit: "$17.26 76 016.99",
+        claims: "708509",
+        members: "368572",
+      },
+    ],
+  };
 
   // Mock data for monthly bar chart
   const monthlyData = [
@@ -71,23 +106,49 @@ const TrendsChart = () => {
 
   // Mock data for trend lines
   const trendData = [
-    { quarter: "Qtr 2 2022", ndc1: 15, ndc2: 12, ndc3: 8 },
-    { quarter: "Qtr 3 2022", ndc1: 18, ndc2: 14, ndc3: 10 },
-    { quarter: "Qtr 4 2022", ndc1: 22, ndc2: 16, ndc3: 12 },
-    { quarter: "Qtr 1 2023", ndc1: 25, ndc2: 18, ndc3: 14 },
-    { quarter: "Qtr 2 2023", ndc1: 28, ndc2: 20, ndc3: 16 },
-    { quarter: "Qtr 3 2023", ndc1: 30, ndc2: 22, ndc3: 18 },
-    { quarter: "Qtr 4 2023", ndc1: 32, ndc2: 24, ndc3: 20 },
-    { quarter: "Qtr 1 2024", ndc1: 28, ndc2: 20, ndc3: 16 },
-    { quarter: "Qtr 2 2024", ndc1: 25, ndc2: 18, ndc3: 14 },
+    { quarter: "Qtr 2 2022", line1: 15, line2: 12, line3: 8 },
+    { quarter: "Qtr 3 2022", line1: 18, line2: 14, line3: 10 },
+    { quarter: "Qtr 4 2022", line1: 22, line2: 16, line3: 12 },
+    { quarter: "Qtr 1 2023", line1: 25, line2: 18, line3: 14 },
+    { quarter: "Qtr 2 2023", line1: 28, line2: 20, line3: 16 },
+    { quarter: "Qtr 3 2023", line1: 30, line2: 22, line3: 18 },
+    { quarter: "Qtr 4 2023", line1: 32, line2: 24, line3: 20 },
+    { quarter: "Qtr 1 2024", line1: 28, line2: 20, line3: 16 },
+    { quarter: "Qtr 2 2024", line1: 25, line2: 18, line3: 14 },
   ];
 
   // Mock data for horizontal bar chart (left side)
-  const horizontalData = [
-    { category: "00610013560", value: 120, color: "#4A90E2" },
-    { category: "00610043560", value: 80, color: "#F5A623" },
-    { category: "00610011560", value: 40, color: "#5BA7F7" },
-  ];
+  const horizontalData = {
+    ndc: [
+      { category: "00610013560", value: 120, color: "#4A90E2" },
+      { category: "00610043560", value: 80, color: "#F5A623" },
+      { category: "00610011560", value: 40, color: "#5BA7F7" },
+    ],
+    specialty: [
+      { category: "Physician", value: 150, color: "#4A90E2" },
+      { category: "Physician Assistant", value: 90, color: "#F5A623" },
+      { category: "Dermatology", value: 60, color: "#5BA7F7" },
+      { category: "Advanced Practice", value: 30, color: "#10B981" },
+      { category: "Nurse Practitioner", value: 20, color: "#8B5CF6" },
+    ],
+    "member-type": [
+      { category: "Existing Member", value: 180, color: "#4A90E2" },
+    ],
+    "payer-type": [
+      { category: "Commercial", value: 100, color: "#4A90E2" },
+      { category: "Government", value: 60, color: "#F5A623" },
+    ],
+    "day-supply": [
+      { category: "30 Days", value: 140, color: "#4A90E2" },
+      { category: "60 Days", value: 80, color: "#F5A623" },
+      { category: "90 Days", value: 40, color: "#5BA7F7" },
+    ],
+    quantity: [
+      { category: "1-30", value: 120, color: "#4A90E2" },
+      { category: "31-60", value: 70, color: "#F5A623" },
+      { category: "61+", value: 30, color: "#5BA7F7" },
+    ],
+  };
 
   const FilterSection = () => (
     <div className="grid grid-cols-6 gap-4 mb-6">
@@ -179,10 +240,8 @@ const TrendsChart = () => {
     </div>
   );
 
-  return (
-    <div className="p-6 space-y-6">
-      <FilterSection />
-
+  const TabContent = ({ tabKey }) => (
+    <div className="space-y-6">
       {/* Main Content Grid */}
       <div className="grid grid-cols-12 gap-6">
         {/* Left Side - Summary Table and Horizontal Chart */}
@@ -200,7 +259,7 @@ const TrendsChart = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {yearlyData.map((row, index) => (
+                  {yearlyData[tabKey].map((row, index) => (
                     <TableRow
                       key={index}
                       className={
@@ -218,33 +277,74 @@ const TrendsChart = () => {
             </CardContent>
           </Card>
 
-          {/* Horizontal Bar Chart */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-sm">NDC Distribution</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {horizontalData.map((item, index) => (
-                  <div key={index} className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span>{item.category}</span>
-                      <span>{item.value}</span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-4">
-                      <div
-                        className="h-4 rounded-full"
-                        style={{
-                          width: `${(item.value / Math.max(...horizontalData.map((d) => d.value))) * 100}%`,
-                          backgroundColor: item.color,
-                        }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+          {/* Secondary Filter Tabs */}
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-2 text-sm font-medium">
+              <div>NDC</div>
+              <div>Specialty</div>
+              <div>Member Type</div>
+              <div>Payer Type</div>
+              <div>Day Supply</div>
+              <div>Quantity</div>
+            </div>
+
+            <Tabs
+              value={activeFilterTab}
+              onValueChange={setActiveFilterTab}
+              className="w-full"
+            >
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="ndc" className="text-xs">
+                  NDC
+                </TabsTrigger>
+                <TabsTrigger value="specialty" className="text-xs">
+                  Specialty
+                </TabsTrigger>
+                <TabsTrigger value="member-type" className="text-xs">
+                  Member Type
+                </TabsTrigger>
+              </TabsList>
+              <TabsList className="grid w-full grid-cols-3 mt-2">
+                <TabsTrigger value="payer-type" className="text-xs">
+                  Payer Type
+                </TabsTrigger>
+                <TabsTrigger value="day-supply" className="text-xs">
+                  Day Supply
+                </TabsTrigger>
+                <TabsTrigger value="quantity" className="text-xs">
+                  Quantity
+                </TabsTrigger>
+              </TabsList>
+
+              {Object.entries(horizontalData).map(([key, data]) => (
+                <TabsContent key={key} value={key} className="mt-4">
+                  <Card>
+                    <CardContent className="p-4">
+                      <div className="space-y-3">
+                        {data.map((item, index) => (
+                          <div key={index} className="space-y-2">
+                            <div className="flex justify-between text-sm">
+                              <span>{item.category}</span>
+                              <span>{item.value}</span>
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-3">
+                              <div
+                                className="h-3 rounded-full"
+                                style={{
+                                  width: `${(item.value / Math.max(...data.map((d) => d.value))) * 100}%`,
+                                  backgroundColor: item.color,
+                                }}
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              ))}
+            </Tabs>
+          </div>
         </div>
 
         {/* Center - Monthly Bar Chart */}
@@ -267,6 +367,10 @@ const TrendsChart = () => {
                   <div className="w-3 h-3 bg-green-500 rounded"></div>
                   <span>2024</span>
                 </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-purple-500 rounded"></div>
+                  <span>2025</span>
+                </div>
               </div>
             </CardHeader>
             <CardContent>
@@ -287,7 +391,7 @@ const TrendsChart = () => {
           </Card>
         </div>
 
-        {/* Right Side - Categories */}
+        {/* Right Side - Filter Legend */}
         <div className="col-span-3 space-y-4">
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
@@ -309,18 +413,22 @@ const TrendsChart = () => {
               <strong>Quantity</strong>
             </div>
           </div>
-          <div className="flex items-center gap-4 text-sm">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-blue-500 rounded"></div>
-              <span>00610013560</span>
+
+          {/* Active Filter Display */}
+          <div className="space-y-2">
+            <div className="text-sm font-medium">
+              Active Filter: {activeFilterTab.replace("-", " ").toUpperCase()}
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-yellow-500 rounded"></div>
-              <span>00610043560</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-gray-500 rounded"></div>
-              <span>00610011560</span>
+            <div className="space-y-1">
+              {horizontalData[activeFilterTab]?.map((item, index) => (
+                <div key={index} className="flex items-center gap-2 text-sm">
+                  <div
+                    className="w-3 h-3 rounded"
+                    style={{ backgroundColor: item.color }}
+                  />
+                  <span>{item.category}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -338,30 +446,53 @@ const TrendsChart = () => {
                 <Tooltip />
                 <Line
                   type="monotone"
-                  dataKey="ndc1"
+                  dataKey="line1"
                   stroke="#4A90E2"
                   strokeWidth={2}
-                  name="00610013560"
                 />
                 <Line
                   type="monotone"
-                  dataKey="ndc2"
+                  dataKey="line2"
                   stroke="#F5A623"
                   strokeWidth={2}
-                  name="00610043560"
                 />
                 <Line
                   type="monotone"
-                  dataKey="ndc3"
+                  dataKey="line3"
                   stroke="#6B7280"
                   strokeWidth={2}
-                  name="00610011560"
                 />
               </LineChart>
             </ResponsiveContainer>
           </div>
         </CardContent>
       </Card>
+    </div>
+  );
+
+  return (
+    <div className="p-6 space-y-6">
+      <FilterSection />
+
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="total-benefits">Total Benefits</TabsTrigger>
+          <TabsTrigger value="claims">Claims</TabsTrigger>
+          <TabsTrigger value="members">Members</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="total-benefits" className="mt-6">
+          <TabContent tabKey="total-benefits" />
+        </TabsContent>
+
+        <TabsContent value="claims" className="mt-6">
+          <TabContent tabKey="claims" />
+        </TabsContent>
+
+        <TabsContent value="members" className="mt-6">
+          <TabContent tabKey="members" />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
