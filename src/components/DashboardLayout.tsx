@@ -1,39 +1,28 @@
-import React, { useState } from 'react';
-import Sidebar from './Sidebar';
-import Header from './Header';
-import FilterPanel from './FilterPanel';
-import ChartSection from './ChartSection';
+import React, { useState } from "react";
+import BottomNavigation from "./BottomNavigation";
+import Header from "./Header";
+import FilterPanel from "./FilterPanel";
+import ChartSection from "./ChartSection";
 
 const DashboardLayout = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-    const [isFilterOpen, setIsFilterOpen] = useState(false);
-    const [activeTab, setActiveTab] = useState('Brand Summary');
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("Brand Summary");
 
-    return (
-        <div className="min-h-screen bg-gray-50 flex">
-            <Sidebar
-                isSidebarOpen={isSidebarOpen}
-                setIsSidebarOpen={setIsSidebarOpen}
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
-            />
+  return (
+    <div className="min-h-screen bg-gray-50 flex flex-col pb-16">
+      <Header isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen} />
 
-            <div className="flex-1 flex flex-col">
-                <Header
-                    isFilterOpen={isFilterOpen}
-                    setIsFilterOpen={setIsFilterOpen}
-                />
+      <main className="flex-1 relative">
+        <ChartSection activeTab={activeTab} />
+        <FilterPanel
+          isFilterOpen={isFilterOpen}
+          setIsFilterOpen={setIsFilterOpen}
+        />
+      </main>
 
-                <main className="flex-1 relative">
-                    <ChartSection activeTab={activeTab} />
-                    <FilterPanel
-                        isFilterOpen={isFilterOpen}
-                        setIsFilterOpen={setIsFilterOpen}
-                    />
-                </main>
-            </div>
-        </div>
-    );
+      <BottomNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
+    </div>
+  );
 };
 
 export default DashboardLayout;
