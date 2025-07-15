@@ -23,15 +23,15 @@ const Header: React.FC<HeaderProps> = ({ isFilterOpen, setIsFilterOpen }) => {
                     </div>
 
                     <div className="flex items-center space-x-4">
-                        {/*<Button*/}
-                        {/*    variant="ghost"*/}
-                        {/*    size="sm"*/}
-                        {/*    onClick={() => setIsFilterOpen(!isFilterOpen)}*/}
-                        {/*    className="text-white hover:bg-white/20"*/}
-                        {/*>*/}
-                        {/*    <Filter className="w-4 h-4 mr-2" />*/}
-                        {/*    Filters*/}
-                        {/*</Button>*/}
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => setIsFilterOpen(!isFilterOpen)}
+                            className="text-white hover:bg-white/20"
+                        >
+                            <Filter className="w-4 h-4 mr-2" />
+                            Filters
+                        </Button>
 
                         <div className="flex items-center space-x-3 border-l border-white/20 pl-4">
                             <div className="text-sm">

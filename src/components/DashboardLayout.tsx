@@ -3,6 +3,7 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 import FilterPanel from './FilterPanel';
 import ChartSection from './ChartSection';
+import BottomNavigation from "@/components/BottomNavigation.tsx";
 
 const DashboardLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -11,12 +12,12 @@ const DashboardLayout = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 flex">
-            <Sidebar
-                isSidebarOpen={isSidebarOpen}
-                setIsSidebarOpen={setIsSidebarOpen}
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
-            />
+            {/*<Sidebar*/}
+            {/*    isSidebarOpen={isSidebarOpen}*/}
+            {/*    setIsSidebarOpen={setIsSidebarOpen}*/}
+            {/*    activeTab={activeTab}*/}
+            {/*    setActiveTab={setActiveTab}*/}
+            {/*/>*/}
 
             <div className="flex-1 flex flex-col">
                 <Header
@@ -31,6 +32,7 @@ const DashboardLayout = () => {
                         setIsFilterOpen={setIsFilterOpen}
                     />
                 </main>
+                <BottomNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
             </div>
         </div>
     );
